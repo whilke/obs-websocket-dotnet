@@ -267,6 +267,30 @@ namespace OBSWebsocketDotNet
         }
 
         /// <summary>
+        /// Set the crop of the specified scene item
+        /// </summary>
+        /// <param name="itemName">Name of the scene item which transform will be changed</param>
+        /// <param name="top">top crop position</param>
+        /// <param name="bottom">bottom crop position</param>
+        /// <param name="left">left crop position</param>
+        /// <param name="right">right crop position</param>
+        /// <param name="sceneName">(optional) name of the scene the item belongs to</param>
+        public void SetSceneItemCrop(string itemName, int top, int bottom, int left, int right, string sceneName = null)
+        {
+            var requestFields = new JObject();
+            requestFields.Add("item", itemName);
+            requestFields.Add("top", top);
+            requestFields.Add("bottom", bottom);
+            requestFields.Add("left", left);
+            requestFields.Add("right", right);
+
+            if (sceneName != null)
+                requestFields.Add("scene-name", sceneName);
+
+            SendRequest("SetSceneItemCrop", requestFields);
+        }
+
+        /// <summary>
         /// Set the current scene collection to the specified one
         /// </summary>
         /// <param name="scName">Desired scene collection name</param>
